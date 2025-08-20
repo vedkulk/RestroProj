@@ -1,1 +1,35 @@
-<p>booking works!</p>
+<body>
+    <div class="main-div">
+        <div class="form-div">
+            <h1>Book a Table</h1>
+            <form [formGroup]="bookingDetails" (ngSubmit)="captureBookingDetails()">
+                <div class="input-group">
+                    <label>Email :</label>
+                    <input id="bemail" type="email" [formControl]="bookingDetails.controls.email"/>
+                </div>
+                
+                <div class="input-group">
+                    <label>Restaurant :</label>
+                    <input id="brestaurant" type="text" [formControl]="bookingDetails.controls.restaurant"/>
+                </div>
+
+                <div class="input-group">
+                    <label>Booking Date :</label>
+                    <input id="bname" type="date" [formControl]="bookingDetails.controls.bookingDate"/>
+                </div>
+                
+                <div class="input-group">
+                    <label>Booking Time :</label>
+                    <input id="btime" type="time" [formControl]="bookingDetails.controls.bookingTime"/>
+                </div>
+                
+                <div class="input-group">
+                    <label>No of people :</label>
+                    <input id="headcount" type="number" [formControl]="bookingDetails.controls.headCount"/>
+                </div>
+                
+                <button type="submit">Book</button>
+            </form>
+        </div>
+    </div>
+</body>
