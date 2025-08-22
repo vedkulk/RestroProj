@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-restaurants-list',
-  imports: [],
+  standalone: true, 
   templateUrl: './restaurants-list.component.html',
-  styleUrl: './restaurants-list.component.css'
+  styleUrls: ['./restaurants-list.component.css'] // ✅ correct spelling
 })
-export class RestaurantsListComponent {
+export class RestaurantsListComponent {}
 
-}
