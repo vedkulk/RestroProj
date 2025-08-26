@@ -16,7 +16,7 @@
             </div>
             <label>Password:</label>
             <input type="password" name="password" ngModel required minlength="8"
-            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&]).+$" #password="ngModel" />
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$" #password="ngModel" />
             <div *ngIf="password.invalid && password.touched" class="error">
                 <small *ngIf="password.errors?.['required']">Password is required.</small>
                 <small *ngIf="password.errors?.['minlength']">At least 8 characters.</small>
