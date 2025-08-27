@@ -72,6 +72,13 @@ input:invalid {
     border-color: #e74c3c;
 }
 
+.error small {
+    color: #e74c3c;
+    display: block;
+    margin-top: 4px;
+    font-size: 13px;
+}
+
 button {
     background: rgba(255, 165, 0, 1);
     color: white;
