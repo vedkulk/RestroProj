@@ -1,1 +1,11 @@
-<p>restaurants-list works!</p>
+<div class="restaurant-container">
+    <div class="card" *ngFor="let rest of restaurants">
+      <h2>{{ rest.name }}</h2>
+      <p><strong>Cuisine:</strong> {{ rest.cuisine }}</p>
+      <p><strong>Address:</strong> {{ rest.address }}</p>
+      <p><strong>Timings:</strong> {{ rest.open_time }} - {{ rest.close_time }}</p>
+      <p><strong>Tables:</strong> {{ rest.no_of_tables }}</p>
+      <button>Book Table</button>
+    </div>
+  </div>
+  
