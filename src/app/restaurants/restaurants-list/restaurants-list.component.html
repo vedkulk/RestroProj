@@ -5,7 +5,7 @@
       <p><strong>Address:</strong> {{ rest.address }}</p>
       <p><strong>Timings:</strong> {{ rest.open_time }} - {{ rest.close_time }}</p>
       <p><strong>Tables:</strong> {{ rest.no_of_tables }}</p>
-      <button>Book Table</button>
+      <button (click)="selectRestaurant(rest)">Book Table</button>
     </div>
   </div>
   

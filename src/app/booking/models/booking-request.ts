@@ -3,5 +3,5 @@ export class BookingRequest {
     restaurant : string = '';
     bookingDate : string = '';
     bookingTime : string = '';
-    headCount : number = 0;
+    headCount : number = 1;
 }

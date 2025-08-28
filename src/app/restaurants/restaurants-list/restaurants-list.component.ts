@@ -1,43 +1,32 @@
-import { Component } from '@angular/core';
 import { RestaurantClass } from './model/restaurantClass';
 import { CommonModule } from '@angular/common';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { RestaurantsService } from '../restaurants.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-restaurants-list',
   standalone: true, 
   templateUrl: './restaurants-list.component.html',
   imports: [CommonModule],
-  styleUrls: ['./restaurants-list.component.css'] // ✅ correct spelling
+  styleUrls: ['./restaurants-list.component.css']
 })
-export class RestaurantsListComponent {
-  restaurants: RestaurantClass[] = [
-    {
-      id: 1,
-      name: 'Spice Hub',
-      address: 'MG Road, Pune',
-      cuisine: 'Indian',
-      open_time: '10:00 AM',
-      close_time: '11:00 PM',
-      no_of_tables: 20
-    },
-    {
-      id: 2,
-      name: 'Ocean Breeze',
-      address: 'Juhu Beach, Mumbai',
-      cuisine: 'Seafood',
-      open_time: '12:00 PM',
-      close_time: '12:00 AM',
-      no_of_tables: 15
-    },
-    {
-      id: 3,
-      name: 'Green Leaf',
-      address: 'Koramangala, Bangalore',
-      cuisine: 'Vegan',
-      open_time: '9:00 AM',
-      close_time: '10:00 PM',
-      no_of_tables: 10
+export class RestaurantsListComponent implements OnInit {
+  @Input() restaurants: RestaurantClass[] = [];
+  @Output() restaurantSelected = new EventEmitter<RestaurantClass>();
+
+
+  constructor(private restaurantsService: RestaurantsService,   private router: Router) {}
+
+  ngOnInit(): void {
+    if (this.restaurants.length === 0) {
+      this.restaurants = this.restaurantsService.getRestaurants();
     }
-  ];
+  }
+
+  selectRestaurant(rest: RestaurantClass) {
+    this.restaurantsService.setSelectedRestaurant(rest);
+    this.router.navigate(['/booking']);
+  }
 }
 
