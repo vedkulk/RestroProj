@@ -1,0 +1,33 @@
+<div class="main-div">
+    <div class="form-div">
+      <h1>Book a Table</h1>
+      <form [formGroup]="bookingDetails" (ngSubmit)="captureBookingDetails()">
+        <div class="input-group">
+          <label>Email :</label>
+          <input type="email" formControlName="email" placeholder="Enter email" />
+          <div *ngIf="bookingDetails.get('email')?.touched && bookingDetails.get('email')?.invalid" class="error">
+            <small *ngIf="bookingDetails.get('email')?.errors?.['required']">Email is required</small>
+            <small *ngIf="bookingDetails.get('email')?.errors?.['email']">Enter a valid email</small>
+          </div>
+        </div>
+          <div class="input-group">
+          <label>Restaurant : </label>
+          <input type="text" formControlName="restaurant" readonly />
+        </div>
+          <div class="input-group">
+          <label>Booking Date :</label>
+          <input type="date" formControlName="bookingDate" />
+        </div>
+          <div class="input-group">
+          <label>Booking Time :</label>
+          <input type="time" formControlName="bookingTime" />
+        </div>
+          <div class="input-group">
+          <label>No of people :</label>
+          <input type="number" formControlName="headCount" min="1" />
+        </div>
+        <button type="submit" [disabled]="bookingDetails.invalid">Book</button>
+      </form>
+    </div>
+  </div>
+  
