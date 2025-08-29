@@ -1,0 +1,44 @@
+{
+  "/api/users/v1/signup": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/users/v1/signup": "/userses"
+    }
+  },
+  "/api/users/v1/*": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/users/v1": "/userses"
+    }
+  },
+  "/api/restaurant/v1/*": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/restaurant/v1": "/restaurants"
+    }
+  },
+  "/api/booking/v1/*": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/booking/v1": "/bookings"
+    }
+  },
+  "/api/*": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}
