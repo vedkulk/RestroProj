@@ -25,7 +25,7 @@
                 </small>
             </div>
             <label>Phone Number:</label>
-            <input type="tel" name="phoneNumber" ngModel required pattern="^[0-9]{10}$" #phone="ngModel" />
+            <input type="tel" name="phone_num" ngModel required pattern="^[0-9]{10}$" #phone="ngModel" />
             <div *ngIf="phone.invalid && phone.touched" class="error">
                 <small *ngIf="phone.errors?.['required']">Phone number is required.</small>
                 <small *ngIf="phone.errors?.['pattern']">Must be 10 digits.</small>
