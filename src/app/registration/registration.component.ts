@@ -1,35 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { User } from './model/registration-request';
+import { RegistrationService } from './registration.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent {
-  private apiUrl = `${environment.api.users}`
-  constructor(private http:HttpClient){}
+  constructor(private registerService: RegistrationService) {}
+
+  user = new User();
 
   onSubmit(form: any) {
-    console.log('Form Data:', form.value);
-    this.http.post<any>(this.apiUrl, form.value).subscribe({
-      next: (response) => {
-        console.log('User registered successfully:', response);
-
-        if (response && response._links && response._links.self && response._links.self.href) {
-          const userUrl = response._links.self.href;
-          const userId = userUrl.split('/').pop(); 
-          localStorage.setItem('user_id', userId);
-          console.log('Stored user_id:', userId);
-        }
-
-        alert('Registration successful!');
-      },
-      error: (error) => {
-        console.error('Registration failed:', error);
-        alert('Something went wrong!');
-      }
-    });
+    if (!form.valid) {
+      alert('Please fill all required fields correctly before submitting.');
+      return;
+    } else {
+      this.user.name = form.value.name;
+      this.user.email = form.value.email;
+      this.user.password = form.value.password;
+      this.user.phoneNumber = Number(form.value.phoneNumber);
+      console.log('User Data:', this.user);
+      this.registerService.createRegistration(this.user);
+    }
   }
 }

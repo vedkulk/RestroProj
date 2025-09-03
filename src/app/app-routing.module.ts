@@ -5,13 +5,13 @@ import { RegistrationComponent } from './registration/registration.component';
 import { RestaurantsListComponent } from './restaurants/restaurants-list/restaurants-list.component';
 
 const routes: Routes = [
-  {path: '', component: RestaurantsListComponent},
-  {path:'registration', component: RegistrationComponent},
-  {path:'booking',component: BookingComponent}
+  { path: '', component: RestaurantsListComponent },
+  { path: 'registration', component: RegistrationComponent },
+  { path: 'booking', component: BookingComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,27 +1,51 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { RestaurantClass } from './restaurants-list/model/restaurantClass';
+import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RestaurantsService {
-
-  private restaurants: RestaurantClass[] = [
-    { id: 1, name: 'Pizza Palace', address: 'Karve Nagar', cuisine: 'Italian', open_time: '10:00', close_time: '22:00', no_of_tables: 10 },
-    { id: 2, name: 'Sushi Spot', address: 'Baner', cuisine: 'Japanese', open_time: '11:00', close_time: '21:00', no_of_tables: 8 },
-    { id: 3, name: 'Taco Alfresco', address: 'Bavdhan', cuisine: 'Mexican', open_time: '09:00', close_time: '20:00', no_of_tables: 12 },
-    { id: 4, name: 'Spice Symphony', address: 'Kothrud', cuisine: 'Indian', open_time: '08:00', close_time: '23:00', no_of_tables: 15 },
-    { id: 5, name: 'Dragon Wok', address: 'Viman Nagar', cuisine: 'Chinese', open_time: '10:30', close_time: '22:30', no_of_tables: 9 },
-    { id: 6, name: 'Burger Hub', address: 'Hinjewadi', cuisine: 'American', open_time: '11:00', close_time: '23:30', no_of_tables: 14 },
-    { id: 7, name: 'Mediterraneo', address: 'Koregaon Park', cuisine: 'Mediterranean', open_time: '12:00', close_time: '23:00', no_of_tables: 7 },
-    { id: 8, name: 'Punjabi Zaika', address: 'Swargate', cuisine: 'Punjabi', open_time: '09:30', close_time: '22:00', no_of_tables: 18 },
-  ];
-  
-
-  constructor() { }
+  private apiUrl = `${environment.backendURL}${environment.api.restaurants}/get`;
   private selectedRestaurant?: RestaurantClass;
-  getRestaurants(): RestaurantClass[] {
-    return this.restaurants;
+
+  constructor(private http: HttpClient) {}
+
+  getRestaurants(): Observable<RestaurantClass[]> {
+    const headers = {
+      'ngrok-skip-browser-warning': 'true',
+    };
+
+    return this.http.get(this.apiUrl, { headers, responseType: 'text' }).pipe(
+      map((res) => {
+        try {
+          const response = JSON.parse(res);
+          if (!Array.isArray(response)) {
+            console.error('Expected array but got:', typeof response);
+            return [];
+          }
+          return response.map((r: any) => ({
+            id: r.restId,
+            name: r.name,
+            address: r.address,
+            cuisine: r.cuisine,
+            openTime: r.openTime,
+            closeTime: r.closeTime,
+            numberOfTables: r.noOfTables,
+          }));
+        } catch (e) {
+          console.error('JSON parsing error:', e);
+          return [];
+        }
+      }),
+      catchError((error) => {
+        console.error('HTTP request failed:', error);
+        return of([]);
+      })
+    );
   }
 
   setSelectedRestaurant(rest: RestaurantClass): void {
@@ -30,5 +54,5 @@ export class RestaurantsService {
 
   getSelectedRestaurant(): RestaurantClass | undefined {
     return this.selectedRestaurant;
-  } 
+  }
 }

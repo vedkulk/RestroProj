@@ -1,6 +1,8 @@
 export const environment = {
-    backendURL: "http://localhost:8080",
-    api : {
-        users: '/userses'
-    }
-}
+  backendURL: 'https://4fb18c113067.ngrok-free.app',
+  api: {
+    register: '/user',
+    restaurants: '/resto',
+    bookings: '/booking',
+  },
+};

@@ -1,11 +1,18 @@
 <div class="restaurant-container">
+  <div *ngIf="restaurants.length > 0">
     <div class="card" *ngFor="let rest of restaurants">
       <h2>{{ rest.name }}</h2>
       <p><strong>Cuisine:</strong> {{ rest.cuisine }}</p>
       <p><strong>Address:</strong> {{ rest.address }}</p>
-      <p><strong>Timings:</strong> {{ rest.open_time }} - {{ rest.close_time }}</p>
-      <p><strong>Tables:</strong> {{ rest.no_of_tables }}</p>
+      <p>
+        <strong>Opening Time:</strong> {{ rest.openTime }} -
+        <strong>Closing Time:</strong> {{ rest.closeTime }}
+      </p>
+      <p><strong>Tables:</strong> {{ rest.numberOfTables }}</p>
       <button (click)="selectRestaurant(rest)">Book Table</button>
     </div>
   </div>
-  
+  <div *ngIf="restaurants.length === 0" class="no-restaurants">
+    <p>No restaurants found.</p>
+  </div>
+</div>
