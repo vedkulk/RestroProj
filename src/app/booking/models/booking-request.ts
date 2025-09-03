@@ -1,7 +1,7 @@
 export class BookingRequest {
-    email : string = '';
-    restaurant : string = '';
-    bookingDate : string = '';
-    bookingTime : string = '';
-    headCount : number = 0;
+  restaurant: string = '';
+  date: string = '';
+  people: number = 1;
+  userId!: number;
+  restId!: number;
 }

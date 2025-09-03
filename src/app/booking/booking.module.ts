@@ -3,14 +3,8 @@ import { CommonModule } from '@angular/common';
 import { BookingComponent } from './booking.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
-  declarations: [
-    BookingComponent
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ]
+  declarations: [BookingComponent],
+  imports: [CommonModule, ReactiveFormsModule],
 })
-export class BookingModule { }
+export class BookingModule {}
